@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: DEPLOY
+    name: deploy
     runs-on: ubuntu-18.04
 
     steps:
@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: Docker Image Build
-        run: docker build --build-arg DEPENDENCY=build/dependency -t dohyeon5626/ahreview .
+        run: docker build -t dohyeon5626/ahreview .
 
       - name: Upload to DockerHub
         run: docker push dohyeon5626/ahreview
