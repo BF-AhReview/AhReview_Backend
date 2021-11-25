@@ -23,6 +23,15 @@ public class MypageService {
                 user.getName(),
                 user.getStoreList().stream().map(
                         Store::getAddress
+                ).collect(Collectors.toList()),
+                user.getReviewList().stream().map(
+                        a -> {
+                            return new UserInfoDto.ReviewInfo(
+                                    a.getStore().getAddress(),
+                                    a.getStarScore(),
+                                    a.getReview()
+                            );
+                        }
                 ).collect(Collectors.toList())
         );
     }
