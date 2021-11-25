@@ -33,6 +33,8 @@ public class Review {
 
     private String review;
 
+    private boolean positive;
+
     @Min(1)
     @Max(5)
     private double starScore;
