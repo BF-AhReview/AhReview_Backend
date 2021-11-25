@@ -22,6 +22,8 @@ public class Store {
 
     private String name;
 
+    private String url;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_email", nullable = false)
     private User user;
