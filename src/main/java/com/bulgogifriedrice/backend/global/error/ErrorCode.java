@@ -13,7 +13,7 @@ public enum ErrorCode {
     INVALID_CODE(401, "Invalid Code"),
 
     USER_NOT_FOUND(404, "User Not Found"),
-    PICTURE_NOT_FOUND(404, "Picture Not Found");
+    STORE_NOT_FOUND(404, "Store Not Found");
 
     private final int status;
     private final String message;
