@@ -4,7 +4,7 @@ auth:
   api:
     id: ${CLIENT_ID:}
     secret: ${CLIENT_SECRET:}
-    state: ${STATE}
+    state: ${STATE:}
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

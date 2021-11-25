@@ -1,12 +1,14 @@
 package com.bulgogifriedrice.backend.domain.auth.service;
 
 import com.bulgogifriedrice.backend.domain.auth.dto.LoginDto;
+import com.bulgogifriedrice.backend.domain.auth.dto.TokenRefreshDto;
 import com.bulgogifriedrice.backend.domain.auth.entity.User;
 import com.bulgogifriedrice.backend.domain.auth.repository.UserRepository;
 import com.bulgogifriedrice.backend.domain.auth.util.api.client.NaverTokenClient;
 import com.bulgogifriedrice.backend.domain.auth.util.api.client.NaverUserClient;
 import com.bulgogifriedrice.backend.domain.auth.util.api.dto.NaverUserInfo;
 import com.bulgogifriedrice.backend.global.error.exception.InvalidCodeException;
+import com.bulgogifriedrice.backend.global.error.exception.InvalidTokenException;
 import com.bulgogifriedrice.backend.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -66,4 +68,16 @@ public class AuthService {
         return new LoginDto.Response(accessToken, refreshToken);
     }
 
+    public TokenRefreshDto.Response tokenRefresh(TokenRefreshDto.Request request) {
+        String refreshToken = request.getRefreshToken();
+
+        if (jwtTokenProvider.validateRefreshToken(refreshToken)) {
+            String id = jwtTokenProvider.getId(refreshToken);
+            if (userRepository.existsById(id)) {
+                String accessToken = jwtTokenProvider.generateAccessToken(id);
+                return new TokenRefreshDto.Response(accessToken);
+            }
+        }
+        throw new InvalidTokenException();
+    }
 }
