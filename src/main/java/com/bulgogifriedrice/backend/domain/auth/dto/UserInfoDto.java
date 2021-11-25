@@ -22,8 +22,7 @@ public class UserInfoDto {
 
         @ApiModelProperty(value = "유저 이름", example = "홍길동")
         private String name;
-
-        @ApiModelProperty(value = "유저 가게 주소 리스트", example = "['제주도', '서울', '평양']")
+        
         private List<StoreInfo> storeList;
 
         private List<ReviewInfo> reviewInfoList;
