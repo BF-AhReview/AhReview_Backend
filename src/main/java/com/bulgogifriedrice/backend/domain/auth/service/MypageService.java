@@ -23,7 +23,8 @@ public class MypageService {
                 user.getStoreList().stream().map(
                         a -> new UserInfoDto.StoreInfo(
                                 a.getAddress(),
-                                a.getName()
+                                a.getName(),
+                                a.getUrl()
                         )
                 ).collect(Collectors.toList()),
                 user.getReviewList().stream().map(
