@@ -33,15 +33,18 @@ public class AuthService {
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public LoginDto.Response login(LoginDto.Request request) {
+    public LoginDto.Response loginByCode(LoginDto.CodeRequest request) {
         String token = naverTokenClient.getToken(
                 "authorization_code",
                 clientId,
                 clientSecret,
                 request.getCode(),
                 state
-                ).getAccessToken();
+        ).getAccessToken();
+        return loginByToken(token);
+    }
 
+    public LoginDto.Response loginByToken(String token) {
         if (token == null) {
             throw new InvalidCodeException();
         }

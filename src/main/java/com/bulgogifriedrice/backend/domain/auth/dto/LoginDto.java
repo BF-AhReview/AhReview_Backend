@@ -13,11 +13,22 @@ public class LoginDto {
     @Getter
     @NoArgsConstructor
     @ApiModel(value = "네이버 로그인 request", description = "네이버 로그인 request")
-    public static class Request {
+    public static class CodeRequest {
 
         @NotBlank
         @ApiModelProperty(value = "네이버 code", example = "naverCode")
         private String code;
+
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @ApiModel(value = "네이버 로그인 request", description = "네이버 로그인 request")
+    public static class TokenRequest {
+
+        @NotBlank
+        @ApiModelProperty(value = "네이버 access token", example = "naver access token")
+        private String accessToken;
 
     }
 
