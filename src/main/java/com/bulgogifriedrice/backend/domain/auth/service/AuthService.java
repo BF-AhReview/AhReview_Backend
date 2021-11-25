@@ -54,7 +54,6 @@ public class AuthService {
                     .email(email)
                     .profile(userInfo.getProfileImage())
                     .name(userInfo.getName())
-                    .isStoreOwner(false)
                     .build();
             userRepository.save(user);
         } else {

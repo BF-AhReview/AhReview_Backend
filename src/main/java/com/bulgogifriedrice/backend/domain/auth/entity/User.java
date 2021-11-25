@@ -1,13 +1,13 @@
 package com.bulgogifriedrice.backend.domain.auth.entity;
 
+import com.bulgogifriedrice.backend.domain.store.entity.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Builder
@@ -25,8 +25,8 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private boolean isStoreOwner;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Store> storeList;
 
     public void updateInfo(String profile, String name) {
         this.profile = profile;

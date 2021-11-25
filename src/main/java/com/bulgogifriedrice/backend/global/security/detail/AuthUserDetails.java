@@ -21,10 +21,6 @@ public class AuthUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
-
-        if (user.isStoreOwner())
-            authorities.add(new SimpleGrantedAuthority("STORE"));
-
         return authorities;
     }
 
