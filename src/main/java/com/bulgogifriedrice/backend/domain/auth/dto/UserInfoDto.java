@@ -40,6 +40,9 @@ public class UserInfoDto {
         @ApiModelProperty(value = "가게 이름", example = "홍길동네 감귤")
         private String name;
 
+        @ApiModelProperty(value = "가게 사진 url", example = "ddsfsdfs.com")
+        private String url;
+
     }
 
     @Getter
