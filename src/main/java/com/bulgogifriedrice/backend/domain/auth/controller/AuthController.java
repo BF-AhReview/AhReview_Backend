@@ -17,10 +17,16 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/login")
+    @PostMapping("/login/code")
     @ApiOperation(value = "네이버 oauth 로그인", notes = "네이버 oauth code를 받아서 로그인합니다")
-    public LoginDto.Response login(@Valid @RequestBody LoginDto.Request request) {
-        return authService.login(request);
+    public LoginDto.Response loginByCode(@Valid @RequestBody LoginDto.CodeRequest request) {
+        return authService.loginByCode(request);
+    }
+
+    @PostMapping("/login/token")
+    @ApiOperation(value = "네이버 oauth 로그인", notes = "네이버 oauth token를 받아서 로그인합니다")
+    public LoginDto.Response loginByToken(@Valid @RequestBody LoginDto.TokenRequest request) {
+        return authService.loginByToken(request.getAccessToken());
     }
 
     @PostMapping("/token-refresh")

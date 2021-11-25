@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                         "/swagger-resources/**"
                 ).permitAll()
 
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/login/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/token-refresh").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/info").hasAuthority("USER")
                 .antMatchers(HttpMethod.POST, "/store").hasAuthority("USER")
