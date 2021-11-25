@@ -33,6 +33,8 @@ public class Review {
 
     private String review;
 
+    private String answer;
+
     private boolean positive;
 
     @Min(1)

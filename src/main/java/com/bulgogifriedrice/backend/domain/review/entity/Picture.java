@@ -23,7 +23,7 @@ public class Picture {
     @JoinColumn(name = "review_id", nullable = false)
     private Review review;
 
-    @Lob
-    private Blob photo;
+    @Column(nullable = false)
+    private String url;
 
 }

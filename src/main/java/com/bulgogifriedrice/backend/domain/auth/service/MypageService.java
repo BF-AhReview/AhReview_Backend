@@ -3,7 +3,6 @@ package com.bulgogifriedrice.backend.domain.auth.service;
 import com.bulgogifriedrice.backend.domain.auth.dto.UserInfoDto;
 import com.bulgogifriedrice.backend.domain.auth.entity.User;
 import com.bulgogifriedrice.backend.domain.auth.repository.UserRepository;
-import com.bulgogifriedrice.backend.domain.store.entity.Store;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +21,19 @@ public class MypageService {
                 user.getProfile(),
                 user.getName(),
                 user.getStoreList().stream().map(
-                        Store::getAddress
+                        a -> new UserInfoDto.StoreInfo(
+                                a.getAddress(),
+                                a.getName()
+                        )
                 ).collect(Collectors.toList()),
                 user.getReviewList().stream().map(
-                        a -> {
-                            return new UserInfoDto.ReviewInfo(
-                                    a.getStore().getAddress(),
-                                    a.getStarScore(),
-                                    a.getReview()
-                            );
-                        }
+                        a -> new UserInfoDto.ReviewInfo(
+                                a.getStore().getAddress(),
+                                a.getStore().getName(),
+                                a.getStore().getUrl(),
+                                a.getStarScore(),
+                                a.getReview()
+                        )
                 ).collect(Collectors.toList())
         );
     }
