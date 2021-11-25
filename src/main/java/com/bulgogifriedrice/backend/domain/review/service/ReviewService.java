@@ -2,6 +2,7 @@ package com.bulgogifriedrice.backend.domain.review.service;
 
 import com.bulgogifriedrice.backend.domain.auth.entity.User;
 import com.bulgogifriedrice.backend.domain.auth.repository.UserRepository;
+import com.bulgogifriedrice.backend.domain.review.dto.ReviewGetDto;
 import com.bulgogifriedrice.backend.domain.review.dto.ReviewRegisterDto;
 import com.bulgogifriedrice.backend.domain.review.entity.Picture;
 import com.bulgogifriedrice.backend.domain.review.entity.Review;
@@ -12,6 +13,9 @@ import com.bulgogifriedrice.backend.domain.store.repository.StoreRepository;
 import com.bulgogifriedrice.backend.global.error.exception.StoreNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,5 +51,47 @@ public class ReviewService {
                     pictureRepository.save(picture);
                 }
         );
+    }
+
+    public List<ReviewGetDto.Response> getReviewLatest(ReviewGetDto.Request request) {
+        return reviewRepository.findByStoreAddressOrderByIdDesc(request.getAddress()).stream().map(
+                a -> new ReviewGetDto.Response(
+                        a.getStarScore(),
+                        a.isAnonymous() ? null : a.getReviewer().getName(),
+                        a.isPositive(),
+                        a.getReview(),
+                        a.getAnswer(),
+                        a.getPictureList().stream().map(
+                                Picture::getUrl
+                        ).collect(Collectors.toList())
+                )).collect(Collectors.toList());
+    }
+
+    public List<ReviewGetDto.Response> getReviewPositive(ReviewGetDto.Request request) {
+        return reviewRepository.findByStoreAddressAndPositive(request.getAddress(), true).stream().map(
+                a -> new ReviewGetDto.Response(
+                        a.getStarScore(),
+                        a.isAnonymous() ? null : a.getReviewer().getName(),
+                        a.isPositive(),
+                        a.getReview(),
+                        a.getAnswer(),
+                        a.getPictureList().stream().map(
+                                Picture::getUrl
+                        ).collect(Collectors.toList())
+                )).collect(Collectors.toList());
+    }
+
+    public List<ReviewGetDto.Response> getReviewNegative(ReviewGetDto.Request request) {
+        return reviewRepository.findByStoreAddressAndPositive(request.getAddress(), false).stream().map(
+                a -> new ReviewGetDto.Response(
+                        a.getStarScore(),
+                        a.isAnonymous() ? null : a.getReviewer().getName(),
+                        a.isPositive(),
+                        a.getReview(),
+                        a.getAnswer(),
+                        a.getPictureList().stream().map(
+                                Picture::getUrl
+                        ).collect(Collectors.toList())
+                )).collect(Collectors.toList());
     }
 }
