@@ -28,4 +28,9 @@ public class User {
     @Column(nullable = false)
     private boolean isStoreOwner;
 
+    public void updateInfo(String profile, String name) {
+        this.profile = profile;
+        this.name = name;
+    }
+
 }

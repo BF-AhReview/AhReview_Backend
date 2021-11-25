@@ -3,6 +3,7 @@ package com.bulgogifriedrice.backend.global.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -32,14 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                         "/swagger-resources/**"
                 ).permitAll()
 
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+
                 .anyRequest().authenticated()
                 .and().apply(new FilterConfigure(jwtTokenProvider));
 
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }
