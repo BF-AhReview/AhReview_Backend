@@ -28,13 +28,13 @@ public class ReviewController {
 
     @GetMapping
     @ApiOperation(value = "리뷰 가져오기", notes = "filter에 조건을 넣으세요. 1 -> 최신순 / 2 -> 긍정 / 3 -> 부정")
-    public List<ReviewGetDto.Response> getReview(@RequestParam("filter") int filter, @Valid @RequestBody ReviewGetDto.Request request) {
+    public List<ReviewGetDto.Response> getReview(@RequestParam("filter") int filter, @RequestParam("address") String address) {
         if (filter == 1) {
-            return reviewService.getReviewLatest(request);
+            return reviewService.getReviewLatest(address);
         } else if (filter == 2) {
-            return reviewService.getReviewPositive(request);
+            return reviewService.getReviewPositive(address);
         } else if (filter == 3) {
-            return reviewService.getReviewNegative(request);
+            return reviewService.getReviewNegative(address);
         } else {
             throw new InvalidInputValueException();
         }
