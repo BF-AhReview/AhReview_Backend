@@ -24,6 +24,7 @@ public class StoreService {
         User user =  userRepository.findById(userEmail).get();
         Store store = Store.builder()
                 .address(request.getAddress())
+                .name(request.getName())
                 .user(user)
                 .build();
         storeRepository.save(store);
@@ -41,6 +42,7 @@ public class StoreService {
                     avg = avg / size;
                     return new StoreGetDto.Response(
                             a.getAddress(),
+                            a.getName(),
                             avg,
                             size
                     );

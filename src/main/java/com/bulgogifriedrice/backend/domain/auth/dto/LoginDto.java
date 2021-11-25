@@ -12,7 +12,7 @@ public class LoginDto {
 
     @Getter
     @NoArgsConstructor
-    @ApiModel(value = "네이버 로그인 request", description = "네이버 로그인 request")
+    @ApiModel(value = "네이버 code 로그인 request", description = "네이버 로그인 request")
     public static class CodeRequest {
 
         @NotBlank
@@ -23,7 +23,7 @@ public class LoginDto {
 
     @Getter
     @NoArgsConstructor
-    @ApiModel(value = "네이버 로그인 request", description = "네이버 로그인 request")
+    @ApiModel(value = "네이버 token 로그인 request", description = "네이버 로그인 request")
     public static class TokenRequest {
 
         @NotBlank

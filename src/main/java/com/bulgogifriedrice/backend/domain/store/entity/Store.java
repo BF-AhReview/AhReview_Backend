@@ -20,6 +20,8 @@ public class Store {
     @Id
     private String address;
 
+    private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_email", nullable = false)
     private User user;

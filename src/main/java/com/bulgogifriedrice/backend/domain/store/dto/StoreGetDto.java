@@ -15,6 +15,9 @@ public class StoreGetDto {
         @ApiModelProperty(value = "가게 주소", example = "제주도")
         private String address;
 
+        @ApiModelProperty(value = "가게 이름", example = "길동이네 소주팔이")
+        private String name;
+
         @ApiModelProperty(value = "가게 별점", example = "5.0")
         private double starScore;
 

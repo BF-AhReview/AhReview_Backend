@@ -15,8 +15,12 @@ public class StoreRegisterDto {
     public static class Request {
 
         @NotBlank
-        @ApiModelProperty(value = "네이버 code", example = "naverCode")
+        @ApiModelProperty(value = "가게 주소", example = "한라산")
         private String address;
+
+        @NotBlank
+        @ApiModelProperty(value = "가게 이름", example = "백두산 막창 전골")
+        private String name;
 
     }
 
