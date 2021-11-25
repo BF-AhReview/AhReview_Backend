@@ -1,5 +1,6 @@
 package com.bulgogifriedrice.backend.domain.auth.entity;
 
+import com.bulgogifriedrice.backend.domain.review.entity.Review;
 import com.bulgogifriedrice.backend.domain.store.entity.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Store> storeList;
+
+    @OneToMany(mappedBy = "reviewer", fetch = FetchType.LAZY)
+    private List<Review> reviewList;
 
     public void updateInfo(String profile, String name) {
         this.profile = profile;
