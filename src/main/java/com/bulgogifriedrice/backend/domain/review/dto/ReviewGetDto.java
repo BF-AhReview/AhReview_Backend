@@ -12,17 +12,6 @@ import java.util.List;
 public class ReviewGetDto {
 
     @Getter
-    @NoArgsConstructor
-    @ApiModel(value = "리뷰 가져오기 request", description = "리뷰 가져오기 request")
-    public static class Request {
-
-        @NotBlank
-        @ApiModelProperty(value = "가게 주소", example = "울릉도")
-        private String address;
-
-    }
-
-    @Getter
     @AllArgsConstructor
     @ApiModel(value = "리뷰 가져오기 response", description = "리뷰 가져오기 response")
     public static class Response {

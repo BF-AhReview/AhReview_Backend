@@ -53,8 +53,8 @@ public class ReviewService {
         );
     }
 
-    public List<ReviewGetDto.Response> getReviewLatest(ReviewGetDto.Request request) {
-        return reviewRepository.findByStoreAddressOrderByIdDesc(request.getAddress()).stream().map(
+    public List<ReviewGetDto.Response> getReviewLatest(String address) {
+        return reviewRepository.findByStoreAddressOrderByIdDesc(address).stream().map(
                 a -> new ReviewGetDto.Response(
                         a.getStarScore(),
                         a.isAnonymous() ? null : a.getReviewer().getName(),
@@ -67,8 +67,8 @@ public class ReviewService {
                 )).collect(Collectors.toList());
     }
 
-    public List<ReviewGetDto.Response> getReviewPositive(ReviewGetDto.Request request) {
-        return reviewRepository.findByStoreAddressAndPositive(request.getAddress(), true).stream().map(
+    public List<ReviewGetDto.Response> getReviewPositive(String address) {
+        return reviewRepository.findByStoreAddressAndPositive(address, true).stream().map(
                 a -> new ReviewGetDto.Response(
                         a.getStarScore(),
                         a.isAnonymous() ? null : a.getReviewer().getName(),
@@ -81,8 +81,8 @@ public class ReviewService {
                 )).collect(Collectors.toList());
     }
 
-    public List<ReviewGetDto.Response> getReviewNegative(ReviewGetDto.Request request) {
-        return reviewRepository.findByStoreAddressAndPositive(request.getAddress(), false).stream().map(
+    public List<ReviewGetDto.Response> getReviewNegative(String address) {
+        return reviewRepository.findByStoreAddressAndPositive(address, false).stream().map(
                 a -> new ReviewGetDto.Response(
                         a.getStarScore(),
                         a.isAnonymous() ? null : a.getReviewer().getName(),
