@@ -25,6 +25,7 @@ public class StoreService {
         Store store = Store.builder()
                 .address(request.getAddress())
                 .name(request.getName())
+                .url(request.getUrl())
                 .user(user)
                 .build();
         storeRepository.save(store);
@@ -43,6 +44,7 @@ public class StoreService {
                     return new StoreGetDto.Response(
                             a.getAddress(),
                             a.getName(),
+                            a.getUrl(),
                             avg,
                             size
                     );
