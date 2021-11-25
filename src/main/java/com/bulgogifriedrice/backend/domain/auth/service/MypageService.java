@@ -29,6 +29,8 @@ public class MypageService {
                 user.getReviewList().stream().map(
                         a -> new UserInfoDto.ReviewInfo(
                                 a.getStore().getAddress(),
+                                a.getStore().getName(),
+                                a.getStore().getUrl(),
                                 a.getStarScore(),
                                 a.getReview()
                         )
